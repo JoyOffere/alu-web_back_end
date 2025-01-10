@@ -22,4 +22,3 @@ def safely_get_value(
     else:
         return default
     
-    
