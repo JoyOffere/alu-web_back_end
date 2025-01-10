@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""defining variables"""
+"""adding annotations to sum_list function"""
+from typing import List
 
 
-a: int = 1
-pi: float = 3.14
-i_understand_annotations: bool = True
-school: str = "Holberton"
+def sum_list(input_list: List[float]) -> float:
+    """adding annotations to sum_list function"""
+    return sum(input_list)
