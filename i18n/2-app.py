@@ -7,9 +7,6 @@ from flask import Flask, render_template, request
 from flask_babel import Babel
 
 
-app = Flask(__name__)
-
-
 class Config(object):
     """class config"""
     LANGUAGES = ['en', 'fr']
@@ -17,6 +14,7 @@ class Config(object):
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+app = Flask(__name__)
 app.config.from_object(Config)
 babel = Babel(app)
 
@@ -37,3 +35,4 @@ if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
     port = getenv("API_PORT", "5000")
     app.run(host=host, port=port)
+    
