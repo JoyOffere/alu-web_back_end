@@ -2,7 +2,7 @@
 """
 A Basic flask application
 """
-from flask import Flask, request, g
+from flask import Flask
 from flask import render_template
 from flask_babel import Babel
 
@@ -23,13 +23,6 @@ app.config.from_object(Config)
 # Wrap the application with Babel
 babel = Babel(app)
 
-
-@app.before_request
-def before_request() -> None:
-    """
-    Set the language for the application
-    """
-    g.lang = request.accept_languages.best_match(Config.LANGUAGES)
 
 @app.route('/', strict_slashes=False)
 def index() -> str:
