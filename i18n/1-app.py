@@ -1,33 +1,36 @@
 #!/usr/bin/env python3
 """
-0x0A. i18n
+A Basic flask application
 """
-from os import getenv
-from flask import Flask, render_template
+from flask import Flask
+from flask import render_template
 from flask_babel import Babel
 
 
-app = Flask(__name__)
-babel = Babel(app)
-
-
 class Config(object):
-    """class config"""
+    """
+    Application configuration class
+    """
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+# Instantiate the application object
+app = Flask(__name__)
 app.config.from_object(Config)
 
-
-@app.route('/')
-def index():
-    """hello world"""
-    return render_template("1-index.html", message="Welcome to Holberton")
+# Wrap the application with Babel
+babel = Babel(app)
 
 
-if __name__ == "__main__":
-    host = getenv("API_HOST", "0.0.0.0")
-    port = getenv("API_PORT", "5000")
-    app.run(host=host, port=port)
+@app.route('/', strict_slashes=False)
+def index() -> str:
+    """
+    Renders a basic html template
+    """
+    return render_template('1-index.html')
+
+
+if __name__ == '__main__':
+    app.run()
