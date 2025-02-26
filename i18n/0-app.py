@@ -1,25 +1,21 @@
 #!/usr/bin/env python3
 """
-0x0A. i18n
+A Basic flask application
 """
-from os import getenv
-from flask import Flask, render_template
+from flask import Flask
+from flask import render_template
+
 
 app = Flask(__name__)
 
-@app.route('/')
-    
 
-def index():
-    
+@app.route('/', strict_slashes=False)
+def index() -> str:
+    """
+    Renders a basic html template
+    """
+    return render_template('0-index.html')
 
 
-    """hello world"""
-    
-
-    return render_template("0-index.html", message="Hello world")
-
-if __name__ == "__main__":
-    host = getenv("API_HOST", "0.0.0.0")
-    port = getenv("API_PORT", "5000")
-    app.run(host=host, port=port)
+if __name__ == '__main__':
+    app.run()
