@@ -1,38 +1,45 @@
 #!/usr/bin/env python3
 """
-Route module for the API
+A Basic flask application
 """
-from flask import Flask, render_template, request
-from os import getenv
+from flask import Flask
+from flask import request
+from flask import render_template
 from flask_babel import Babel
-
-app = Flask(__name__)
-babel = Babel(app)
 
 
 class Config(object):
-    """Configuration for languages and time zone"""
+    """
+    Application configuration class
+    """
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
 
 
+# Instantiate the application object
+app = Flask(__name__)
 app.config.from_object(Config)
+
+# Wrap the application with Babel
+babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
-    """Selects the best matching locale from the user's browser preferences."""
+def get_locale() -> str:
+    """
+    Gets locale from request object
+    """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/')
-def index():
-    """hello world"""
-    return render_template("3-index.html", message="Welcome to Holberton")
+@app.route('/', strict_slashes=False)
+def index() -> str:
+    """
+    Renders a basic html template
+    """
+    return render_template('3-index.html')
 
 
-if __name__ == "__main__":
-    host = getenv("API_HOST", "0.0.0.0")
-    port = getenv("API_PORT", "5000")
-    app.run(host=host, port=port)
+if __name__ == '__main__':
+    app.run()
